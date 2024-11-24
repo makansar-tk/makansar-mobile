@@ -9,7 +9,7 @@
 | Stefanus Tan Jaya     | 2306152456    |
 | Sultan Ibnu Mansiz    | 2306275840    |
 
-## Deskripsi Aplikasi :curry: :fork_and_knife: :coffee: :shopping_cart: :star:
+## Deskripsi Aplikasi :curry: :fork_and_knife: :coffee: :heart: :speech_balloon: :star:
 
 **Makassar**, sebagai salah satu kota terbesar di Indonesia, terkenal dengan ragam kuliner khasnya yang menggugah selera. 
 Dengan semakin pesatnya perkembangan industri makanan dan minuman di kota ini, banyak warga lokal maupun wisatawan yang mencari informasi terkait kuliner terbaik yang bisa mereka coba. 
