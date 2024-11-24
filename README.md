@@ -9,9 +9,7 @@
 | Stefanus Tan Jaya     | 2306152456    |
 | Sultan Ibnu Mansiz    | 2306275840    |
 
-## Deskripsi Aplikasi
-
-### Representasi aplikasi dalam *emoji*: :curry:
+## Deskripsi Aplikasi :curry: :fork_knife_plate: :coffee: :shopping_cart: :star:
 
 **Makassar**, sebagai salah satu kota terbesar di Indonesia, terkenal dengan ragam kuliner khasnya yang menggugah selera. 
 Dengan semakin pesatnya perkembangan industri makanan dan minuman di kota ini, banyak warga lokal maupun wisatawan yang mencari informasi terkait kuliner terbaik yang bisa mereka coba. 
@@ -88,3 +86,6 @@ Proses integrasi antara aplikasi Flutter dengan proyek Django kami sebelumnya ad
 2. Menggunakan model autentikasi berupa _login_, _logout_, dan _register_ supaya pengguna mendapat otorisasi yang sesuai dengan *role* **penjual** atau **pembeli**.
 3. Menggunakan library `pbp_django_auth` untuk memfasilitasi proses otentikasi (_login_, _logout_, _register_) dan mengelola *cookie*, sehingga *request* yang terkirim sudah terautentikasi dan terotorisasi.
 4. Membuat **model** yang bersesuaian pada aplikasi Flutter untuk melakukan serialisasi dan deserialisasi data JSON ketika mengirim dan menerima data dari server Django. Model ini bisa menjadi ***endpoint*** yang dapat mengubah data JSON menjadi objek Dart.
+
+## Berita Acara
+Berita acara Kelompok D04 dapat diakses pada [link berikut](https://docs.google.com/spreadsheets/d/1O9_EnhQbVP-6foQNO9U4D_c81BL6zgiMFKff95rVhBM/edit?usp=sharing)
