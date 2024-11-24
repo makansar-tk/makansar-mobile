@@ -64,7 +64,7 @@ Aplikasi ini kami beri nama **Makansar** yang merupakan akronim dari **Makanan M
     ##### Dikerjakan oleh: Gilbert Kristian
 
 ## Sumber _Initial Dataset_
-_Dataset_ yang digunakan dalam pengembangan aplikasi **Makansar** dapat diakses melalui tautan di bawah ini. Kami mengumpulkan _dataset_ tersebut dari berbagai sumber online terpercaya, termasuk Google dan platform _e-commerce_, untuk memastikan keakuratan dan relevansi data dalam mendukung fitur-fitur aplikasi.
+_Dataset_ yang digunakan dalam pengembangan aplikasi **Makansar** dapat diakses melalui tautan di bawah ini. Kami mengumpulkan _dataset_ tersebut dari berbagai sumber *online* terpercaya, termasuk Google dan platform _e-commerce_, untuk memastikan keakuratan dan relevansi data dalam mendukung fitur-fitur aplikasi.
 
 * ##### LINK: [Dataset Makansar](https://docs.google.com/spreadsheets/d/15Phx5eEcQyXIlRXnik7vvG9ARDdfnjWsjejs8jLbDwg/edit?usp=sharing)
 
@@ -88,4 +88,5 @@ Proses integrasi antara aplikasi Flutter dengan proyek Django kami sebelumnya ad
 4. Membuat **model** yang bersesuaian pada aplikasi Flutter untuk melakukan serialisasi dan deserialisasi data JSON ketika mengirim dan menerima data dari server Django. Model ini bisa menjadi ***endpoint*** yang dapat mengubah data JSON menjadi objek Dart.
 
 ## Berita Acara
-Berita acara Kelompok D04 dapat diakses pada [link berikut](https://docs.google.com/spreadsheets/d/1O9_EnhQbVP-6foQNO9U4D_c81BL6zgiMFKff95rVhBM/edit?usp=sharing)
+Berita acara Kelompok D04 dapat diakses dengan *link* di bawah ini.
+* ##### LINK: [Berita Acara D04](https://docs.google.com/spreadsheets/d/1O9_EnhQbVP-6foQNO9U4D_c81BL6zgiMFKff95rVhBM/edit?usp=sharing)
