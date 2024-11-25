@@ -62,7 +62,7 @@ Penjual dapat mengunggah ataupun menambah makanan atau minuman yang ingin mereka
 Pembeli dapat melihat makanan dan minuman yang tersedia di aplikasi. Pembeli juga dapat meng-_edit_ informasi pribadi dengan menggunakan fitur _dashboard_ yang tersedia di halaman utama aplikasi.  Pembeli dapat melihat, memberikan pertanyaan, membalas pertanyaan di forum diskusi, dan memberikan _rating_ dan komentar pada produk yang ia pilih. Tidak lupa, pembeli juga dapat memiliki kendali penuh atas daftar makanan favorit mereka dengan fitur menambahkan atau menghapus makanan dari daftar tersebut.
 
 ## Alur Integrasi
-![Alur Integrasi](img/FlutterDjango.png)<br>
+![Alur Integrasi](img/FlutterDjango.jpg)<br>
 Proses integrasi antara aplikasi Flutter dengan proyek Django kami sebelumnya adalah sebagai berikut:
 1. Menggunakan library `http` untuk melakukan *request* dan *response* HTTP kepada server Django. 
 2. Menggunakan model autentikasi berupa _login_, _logout_, dan _register_ supaya pengguna mendapat otorisasi yang sesuai dengan *role* **penjual** atau **pembeli**.
