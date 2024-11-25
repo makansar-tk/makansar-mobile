@@ -14,10 +14,10 @@
 **Makassar**, sebagai salah satu kota terbesar di Indonesia, terkenal dengan ragam kuliner khasnya yang menggugah selera. 
 Dengan semakin pesatnya perkembangan industri makanan dan minuman di kota ini, banyak warga lokal maupun wisatawan yang mencari informasi terkait kuliner terbaik yang bisa mereka coba. 
 Namun, dengan banyaknya pilihan dan variasi harga, kualitas, serta lokasi, masyarakat sering kali kesulitan untuk menemukan tempat makan yang sesuai dengan keinginan mereka. 
-Oleh karena itu, sebuah aplikasi yang mampu memberikan informasi makanan di Makassar, seperti lokasi, forum, dan rating, menjadi kebutuhan yang sangat relevan. 
-Aplikasi ini tidak hanya membantu pengguna menemukan makanan yang sesuai dengan preferensi mereka, tetapi juga membantu pelaku bisnis kuliner untuk lebih mudah dikenal oleh calon pelanggan.
+Oleh karena itu, sebuah aplikasi yang mampu memberikan informasi makanan di Makassar, seperti lokasi, forum, dan _rating_, menjadi kebutuhan yang sangat relevan. 
+Aplikasi ini tidak hanya membantu pengguna menemukan makanan yang sesuai dengan preferensi mereka, tetapi juga membantu pelaku bisnis kuliner lebih mudah dikenal oleh calon pelanggan.
 
-Aplikasi ini kami beri nama **Makansar** yang merupakan akronim dari **Makanan Makassar**. Makansar adalah aplikasi panduan kuliner Makassar yang memudahkan pengguna dalam mencari dan mengetahui kuliner di Makassar. Penjual dapat mengelola produk mereka secara mandiri, sementara pengguna bisa menambahkan makanan ke favorit, melakukan diskusi dengan penjual atau pengguna lain dengan fitur *forum*, serta mengedit informasi di *dashboard* mereka. Pengguna juga dapat memberikan rating dan komentar pada produk, membantu pengguna lain dalam memilih makanan. Dengan fitur *login* khusus untuk penjual dan pengguna, aplikasi ini dirancang untuk memberikan pengalaman kuliner yang efisien dan menyenangkan.
+Aplikasi ini kami beri nama **Makansar** yang merupakan akronim dari **Makanan Makassar**. Makansar adalah aplikasi panduan kuliner Makassar yang memudahkan pengguna dalam mencari dan mengetahui kuliner di Makassar. Penjual dapat mengelola produk mereka secara mandiri, sementara pengguna bisa menambahkan makanan ke favorit, melakukan diskusi dengan penjual atau pengguna lain dengan fitur *forum*, serta mengedit informasi di *dashboard* mereka. Pengguna juga dapat memberikan _rating_ dan komentar pada produk, membantu pengguna lain dalam memilih makanan. Dengan fitur *login* khusus untuk penjual dan pengguna, aplikasi ini dirancang untuk memberikan pengalaman kuliner yang efisien dan menyenangkan.
 
 ## Daftar Modul Aplikasi
 
@@ -68,21 +68,20 @@ _Dataset_ yang digunakan dalam pengembangan aplikasi **Makansar** dapat diakses 
 * ##### LINK: [Dataset Makansar](https://docs.google.com/spreadsheets/d/15Phx5eEcQyXIlRXnik7vvG9ARDdfnjWsjejs8jLbDwg/edit?usp=sharing)
 
 ## _Role_ atau Peran Pengguna
-_Role_ pengguna di _website_ ini dibagi menjadi dua, yaitu **penjual** dan **pengguna**. 
+_Role_ pengguna di aplikasi ini dibagi menjadi dua, yaitu **penjual** dan **pengguna**. 
 Penjual dapat mengunggah ataupun menambah makanan atau minuman yang ingin mereka jual. 
 Penjual dapat menghapus produk yang telah ditambahkan apabila stok habis atau tidak menginginkan untuk menjualnya lagi. 
 Penjual dapat meng-_edit_ 
 informasi produk yang telah ditambahkan sebelumnya.  
-Penjual dapat membalas pertanyaaan di forum diskusi.
+Penjual dapat membalas komentar pada produk mereka yang telah dikomentari oleh para pengguna.
 
-pengguna dapat melihat makanan dan minuman yang tersedia di _web_. 
-pengguna juga dapat meng-_edit_ informasi pribadi dengan menggunakan fitur _dashboard_ yang tersedia di halaman utama _website_. 
-pengguna dapat melihat, memberikan pertanyaan, dan membalas pertanyaan di forum diskusi, kemudian memberikan _rating_ dan komentar pada produk yang ia pilih. 
+Pengguna dapat melihat makanan dan minuman yang tersedia di aplikasi. 
+Pengguna juga dapat meng-_edit_ informasi pribadi dengan menggunakan fitur _dashboard_, memberikan _rating_ dan komentar pada produk yang ia pilih. 
 Tidak lupa, pengguna juga dapat memiliki kendali penuh atas daftar makanan favorit mereka dengan fitur menambahkan atau menghapus makanan dari daftar tersebut.
 
 ## Alur Integrasi
 Proses integrasi antara aplikasi Flutter dengan proyek Django kami sebelumnya adalah sebagai berikut:
-1. Menggunakan library `http` untuk melakukan *request* dan *response* HTTP kepada server Django. 
+1. Menggunakan library `http` untuk melakukan *request* dan *response* HTTP kepada _server_ Django. 
 2. Menggunakan model autentikasi berupa _login_, _logout_, dan _register_ supaya pengguna mendapat otorisasi yang sesuai dengan *role* **penjual** atau **pengguna**.
 3. Menggunakan library `pbp_django_auth` untuk memfasilitasi proses otentikasi (_login_, _logout_, _register_) dan mengelola *cookie*, sehingga *request* yang terkirim sudah terautentikasi dan terotorisasi.
 4. Membuat **model** yang bersesuaian pada aplikasi Flutter untuk melakukan serialisasi dan deserialisasi data JSON ketika mengirim dan menerima data dari server Django. Model ini bisa menjadi ***endpoint*** yang dapat mengubah data JSON menjadi objek Dart.
