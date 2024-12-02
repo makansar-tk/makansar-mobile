@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:makansar_mobile/widgets/left_drawer.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -14,8 +15,10 @@ class MyHomePage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      drawer: const LeftDrawer(),
       body: const Center(
         child: Text(
           'Welcome to MAKANSAR!',
