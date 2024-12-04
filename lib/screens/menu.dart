@@ -15,64 +15,91 @@ class MyHomePage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        elevation: 2.0,
       ),
       drawer: const LeftDrawer(),
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Welcome to MAKANSAR!',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+      body: Container(
+        color: const Color(0xFFF7F7F9), // Background yang lembut
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Welcome to MAKANSAR!',
+                style: TextStyle(
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: GridView.count(
-              crossAxisCount: 3,
-              children: [
-                _buildButton('Ayam'),
-                _buildButton('Daging'),
-                _buildButton('Chinese Food'),
-                _buildButton('Arabic Food'),
-                _buildButton('Dessert'),
-                _buildButton('Makanan Berkuah'),
-                _buildButton('Nasi'),
-                _buildButton('Seafood'),
-                _buildButton('Martabak'),
-                _buildButton('Beverages'),
-              ],
+            const SizedBox(height: 16.0),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 4, // Jumlah kolom
+                childAspectRatio: 3 / 4, // Rasio aspek tombol
+                crossAxisSpacing: 12.0, // Jarak antar kolom
+                mainAxisSpacing: 12.0, // Jarak antar baris
+                children: [
+                  _buildCategoryCard('Ayam', Icons.fastfood, Colors.orange),
+                  _buildCategoryCard('Daging', Icons.restaurant, Colors.red),
+                  _buildCategoryCard('Chinese Food', Icons.ramen_dining, Colors.amber),
+                  _buildCategoryCard('Arabic Food', Icons.local_dining, Colors.green),
+                  _buildCategoryCard('Dessert', Icons.icecream, Colors.pink),
+                  _buildCategoryCard('Makanan Berkuah', Icons.soup_kitchen, Colors.teal),
+                  _buildCategoryCard('Nasi', Icons.rice_bowl, Colors.brown),
+                  _buildCategoryCard('Seafood', Icons.anchor, Colors.blue),
+                  _buildCategoryCard('Martabak', Icons.local_pizza, Colors.deepOrange),
+                  _buildCategoryCard('Beverages', Icons.local_cafe, Colors.purple),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildButton(String label) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6.0),
+  Widget _buildCategoryCard(String label, IconData icon, Color color) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            blurRadius: 6.0,
+            offset: const Offset(0, 4),
           ),
-        ),
-        onPressed: () {
-          // Tambahkan logika untuk menangani klik tombol di sini
-        },
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 28.0,
+            backgroundColor: color.withOpacity(0.1),
+            child: Icon(
+              icon,
+              size: 32.0,
+              color: color,
+            ),
           ),
-        ),
+          const SizedBox(height: 10.0),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
