@@ -14,7 +14,7 @@ class FoodReviewFormPage extends StatefulWidget {
 class _FoodReviewFormPageState extends State<FoodReviewFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _comment = ""; // comment text
-  int? _rating; // rating from 1-5
+  int? _rating; // rating dari 1 dan 5
 
   @override
   Widget build(BuildContext context) {
