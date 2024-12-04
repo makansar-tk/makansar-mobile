@@ -89,7 +89,7 @@ class MyHomePage extends StatelessWidget {
               color: color,
             ),
           ),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 10.0), 
           Text(
             label,
             style: const TextStyle(
