@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:makansar_mobile/models/food_entry.dart';
-import 'package:makansar_mobile/screens/create_review.dart';
-import 'package:makansar_mobile/screens/see_review.dart';
 
 class FoodDetailPage extends StatelessWidget {
   final FoodEntry food;
-  const FoodDetailPage({super.key, required this.food});
+
+  const FoodDetailPage({Key? key, required this.food}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,70 +12,56 @@ class FoodDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(food.fields.foodName),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               food.fields.foodName,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 16),
             Text(
-              'Harga: ${food.fields.price}',
-              style: const TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Lokasi: ${food.fields.location}',
+              'Description: ${food.fields.foodDesc}',
               style: const TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
             Text(
-              'Rating: ${food.fields.newRating}',
+              'Price: ${food.fields.price}',
               style: const TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 10),
-            const Text(
-              'Deskripsi:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            const SizedBox(height: 8),
             Text(
-              food.fields.foodDesc,
+              'Location: ${food.fields.location}',
               style: const TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 8),
+            Text(
+              'Rating: ${food.fields.ratingDefault}',
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SeeReviewPage(food: food),
-                      ),
-                    );
+                    // Logic untuk menambahkan ulasan
                   },
-                  child: const Text('Lihat Review'),
+                  child: const Text('Add Review'),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CreateReviewPage(food: food),
-                      ),
-                    );
+                    // Logic untuk melihat semua ulasan
                   },
-                  child: const Text('Buat Review'),
+                  child: const Text('See All Reviews'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Logic untuk menambahkan ke favorit
+                  },
+                  child: const Text('Add Favorite'),
                 ),
               ],
             ),
