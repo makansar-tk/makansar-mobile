@@ -5,27 +5,27 @@ import 'package:makansar_mobile/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
-class AyamEntryPage extends StatefulWidget {
-  const AyamEntryPage({super.key});
+class MakananBerkuahEntryPage extends StatefulWidget {
+  const MakananBerkuahEntryPage({super.key});
 
   @override
-  State<AyamEntryPage> createState() => _AyamEntryPageState();
+  State<MakananBerkuahEntryPage> createState() => _MakananBerkuahEntryPageState();
 }
 
-class _AyamEntryPageState extends State<AyamEntryPage> {
-  Future<List<FoodEntry>> fetchAyamFoods(CookieRequest request) async {
+class _MakananBerkuahEntryPageState extends State<MakananBerkuahEntryPage> {
+  Future<List<FoodEntry>> fetchMakananBerkuahFoods(CookieRequest request) async {
     final response = await request.get('http://localhost:8000/json/');
-    List<FoodEntry> listAyam = [];
+    List<FoodEntry> listMakananBerkuah = [];
 
     for (var d in response) {
       if (d != null) {
         FoodEntry food = FoodEntry.fromJson(d);
-        if (food.fields.category.toLowerCase() == "ayam") {
-          listAyam.add(food);
+        if (food.fields.category.toLowerCase() == "makanan berkuah") {
+          listMakananBerkuah.add(food);
         }
       }
     }
-    return listAyam;
+    return listMakananBerkuah;
   }
 
   @override
@@ -34,7 +34,7 @@ class _AyamEntryPageState extends State<AyamEntryPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kategori Ayam'),
+        title: const Text('Kategori Makanan Berkuah'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -44,7 +44,7 @@ class _AyamEntryPageState extends State<AyamEntryPage> {
       ),
       drawer: const LeftDrawer(),
       body: FutureBuilder<List<FoodEntry>>(
-        future: fetchAyamFoods(request),
+        future: fetchMakananBerkuahFoods(request),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -53,7 +53,7 @@ class _AyamEntryPageState extends State<AyamEntryPage> {
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(
               child: Text(
-                'Tidak ada makanan kategori Ayam tersedia.',
+                'Tidak ada makanan kategori Makanan Berkuah tersedia.',
                 style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
             );

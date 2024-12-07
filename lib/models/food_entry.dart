@@ -38,8 +38,8 @@ class Fields {
     String location;
     String shopName;
     String price;
-    double ratingDefault;
-    String newRating;
+    String ratingDefault;
+    double newRating;
     String foodDesc;
     int jumlahReview;
 
@@ -61,7 +61,7 @@ class Fields {
         location: json["location"],
         shopName: json["shop_name"],
         price: json["price"].toString(),
-        ratingDefault: json["rating_default"]?.toDouble(),
+        ratingDefault: json["rating_default"],
         newRating: json["new_rating"]?.toInt() ?? 0,
         foodDesc: json["food_desc"] ?? "",
         jumlahReview: json["jumlah_review"] ?? 0,

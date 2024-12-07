@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:makansar_mobile/screens/kategori/list_makananberkuah.dart';
 import 'package:makansar_mobile/screens/menu.dart';
 import 'package:makansar_mobile/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -116,7 +117,9 @@ class _BuyerPageState extends State<BuyerPage> {
                   _buildCategoryCard('Dessert', Icons.icecream, Colors.pink, () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const DessertEntryPage()));
                   }),
-                  _buildCategoryCard('Makanan Berkuah', Icons.soup_kitchen, Colors.teal, () {}),
+                  _buildCategoryCard('Makanan Berkuah', Icons.soup_kitchen, Colors.teal, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MakananBerkuahEntryPage()));
+                  }),
                   _buildCategoryCard('Nasi', Icons.rice_bowl, Colors.brown, () {}),
                   _buildCategoryCard('Seafood', Icons.anchor, Colors.blue, () {}),
                   _buildCategoryCard('Martabak', Icons.local_pizza, Colors.deepOrange, () {}),
