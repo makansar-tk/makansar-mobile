@@ -243,7 +243,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             "buyer": buyer,
                             "seller": seller,
                           }));
-                      print(response);
                       if (context.mounted) {
                         if (response['status'] == 'success') {
                           ScaffoldMessenger.of(context).showSnackBar(

@@ -1,8 +1,10 @@
-import 'package:makansar_mobile/screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:makansar_mobile/screens/register.dart';
+import 'package:makansar_mobile/screens/buyer.dart';
+import 'package:makansar_mobile/screens/seller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -36,6 +38,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isBuyer = true;
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +47,12 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-              'Login',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+          'Login',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
@@ -105,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () async {
                       String username = _usernameController.text;
                       String password = _passwordController.text;
+                      bool buyer = _isBuyer;
 
                       // Cek kredensial
                       final response = await request
@@ -116,18 +120,31 @@ class _LoginPageState extends State<LoginPage> {
                       if (request.loggedIn) {
                         String message = response['message'];
                         String uname = response['username'];
+
+                        // Store the username in SharedPreferences
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        await prefs.setString('username', uname);
+
                         if (context.mounted) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyHomePage()),
-                          );
+                          if (buyer) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BuyerPage()),
+                            );
+                          } else {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SellerPage()),
+                            );
+                          }
                           ScaffoldMessenger.of(context)
                             ..hideCurrentSnackBar()
                             ..showSnackBar(
                               SnackBar(
-                                  content:
-                                      Text("$message Welcome, $uname.")),
+                                  content: Text("$message Welcome, $uname.")),
                             );
                         }
                       } else {

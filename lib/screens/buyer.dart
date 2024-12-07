@@ -1,8 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:makansar_mobile/screens/login.dart';
+import 'package:makansar_mobile/screens/menu.dart';
+import 'package:makansar_mobile/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class BuyerPage extends StatefulWidget {
+  @override
+  _BuyerPageState createState() => _BuyerPageState();
+}
+
+class _BuyerPageState extends State<BuyerPage> {
+  String _username = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUsername();
+  }
+
+  Future<void> _loadUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _username = prefs.getString('username') ?? 'User';
+    });
+  }
+
+  Future<void> _logout() async {
+    final request = context.read<CookieRequest>();
+    final response = await request.logout("http://127.0.0.1:8000/auth/logout/");
+    String message = response["message"];
+    if (context.mounted) {
+      if (response['status']) {
+        String uname = response["username"];
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("$message Safe travel, $uname."),
+        ));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MyHomePage()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(message),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,37 +61,27 @@ class MyHomePage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 2.0,
         actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
-              );
-            },
-            child: const Text(
-              'Login Here',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Tahoma',
-              ),
-            ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: _logout,
           ),
         ],
       ),
+      drawer: const LeftDrawer(),
       body: Container(
         color: const Color(0xFFF5F3EE), // Background yang lembut
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Welcome to MAKANSAR!',
-                style: TextStyle(
+                'Welcome $_username!',
+                style: const TextStyle(
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
