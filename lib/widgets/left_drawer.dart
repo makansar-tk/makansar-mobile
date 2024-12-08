@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:makansar_mobile/screens/menu.dart';
+import 'package:makansar_mobile/screens/view_profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:makansar_mobile/screens/buyer.dart';
+import 'package:makansar_mobile/screens/seller.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
+
+  Future<String> _getUserRole() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('role') ??
+        'buyer'; // Default to 'buyer' if role is not found
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,16 +51,39 @@ class LeftDrawer extends StatelessWidget {
           // Bagian routing
           ListTile(
             leading: const Icon(Icons.home_outlined, color: Colors.black),
-            title: const Text(
-              'Home Page', 
-              style: TextStyle(color: Colors.black, fontFamily: 'Tahoma')
-            ),
+            title: const Text('Home Page',
+                style: TextStyle(color: Colors.black, fontFamily: 'Tahoma')),
             // Bagian redirection ke MyHomePage
+            onTap: () async {
+              String role = await _getUserRole();
+              if (role == 'buyer') {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BuyerPage(),
+                  ),
+                );
+              } else if (role == 'seller') {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SellerPage(),
+                  ),
+                );
+              }
+            },
+          ),
+          ListTile(
+            leading:
+                const Icon(Icons.account_circle_outlined, color: Colors.black),
+            title: const Text('Profile',
+                style: TextStyle(color: Colors.black, fontFamily: 'Tahoma')),
+            // Bagian redirection ke ProfilePage
             onTap: () {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MyHomePage(),
+                    builder: (context) => ViewProfilePage(),
                   ));
             },
           ),
