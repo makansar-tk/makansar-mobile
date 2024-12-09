@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:makansar_mobile/screens/favorite_food.dart';
 import 'package:makansar_mobile/screens/view_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:makansar_mobile/screens/buyer.dart';
@@ -84,6 +85,18 @@ class LeftDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ViewProfilePage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.favorite, color: Colors.red),
+            title: const Text('Favorite Foods',
+                style: TextStyle(color: Colors.black, fontFamily: 'Tahoma')),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FavoriteFoodScreen(),
                   ));
             },
           ),

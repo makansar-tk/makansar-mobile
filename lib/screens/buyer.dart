@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:makansar_mobile/screens/kategori/list_beverages.dart';
 import 'package:makansar_mobile/screens/kategori/list_makananberkuah.dart';
+import 'package:makansar_mobile/screens/kategori/list_martabak.dart';
+import 'package:makansar_mobile/screens/kategori/list_nasi.dart';
+import 'package:makansar_mobile/screens/kategori/list_seafood.dart';
 import 'package:makansar_mobile/screens/menu.dart';
 import 'package:makansar_mobile/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -120,10 +124,18 @@ class _BuyerPageState extends State<BuyerPage> {
                   _buildCategoryCard('Makanan Berkuah', Icons.soup_kitchen, Colors.teal, () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const MakananBerkuahEntryPage()));
                   }),
-                  _buildCategoryCard('Nasi', Icons.rice_bowl, Colors.brown, () {}),
-                  _buildCategoryCard('Seafood', Icons.anchor, Colors.blue, () {}),
-                  _buildCategoryCard('Martabak', Icons.local_pizza, Colors.deepOrange, () {}),
-                  _buildCategoryCard('Beverages', Icons.local_cafe, Colors.purple, () {}),
+                  _buildCategoryCard('Nasi', Icons.rice_bowl, Colors.brown, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const NasiEntryPage()));
+                  }),
+                  _buildCategoryCard('Seafood', Icons.anchor, Colors.blue, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SeaFoodEntryPage()));
+                  }),
+                  _buildCategoryCard('Martabak', Icons.local_pizza, Colors.deepOrange, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MartabakEntryPage()));
+                  }),
+                  _buildCategoryCard('Beverages', Icons.local_cafe, Colors.purple, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const BeveragesEntryPage()));
+                  }),
                 ],
               ),
             ),
