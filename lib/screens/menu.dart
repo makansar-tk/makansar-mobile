@@ -73,7 +73,7 @@ class MyHomePage extends StatelessWidget {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const DagingEntryPage()));
                   }),
                   _buildCategoryCard('Chinese Food', Icons.ramen_dining, Colors.amber, () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ChineseFoodPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ChineseFoodEntryPage()));
                   }),
                   _buildCategoryCard('Arabic Food', Icons.local_dining, Colors.green, () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const ArabicFoodEntryPage()));

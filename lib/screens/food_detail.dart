@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:makansar_mobile/models/food_entry.dart';
+import 'package:makansar_mobile/screens/food_review.dart';
+import 'package:makansar_mobile/screens/see_review.dart';
 
 class FoodDetailPage extends StatelessWidget {
   final FoodEntry food;
@@ -47,13 +49,22 @@ class FoodDetailPage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Logic untuk menambahkan ulasan
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FoodReviewFormPage(food: food),
+                    ),
+                  );
                   },
                   child: const Text('Add Review'),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Logic untuk melihat semua ulasan
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SeeReviewPage(food: food),
+                      ),
+                    );
                   },
                   child: const Text('See All Reviews'),
                 ),
