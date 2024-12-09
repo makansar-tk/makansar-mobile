@@ -38,13 +38,12 @@ class _BuyerPageState extends State<BuyerPage> {
 
   Future<void> _logout() async {
     final request = context.read<CookieRequest>();
-    final response = await request.logout("http://127.0.0.1:8000/auth/logout/");
+    final response = await request.logout("http://10.0.2.2:8000/auth/logout/");
     String message = response["message"];
     if (context.mounted) {
       if (response['status']) {
-        String uname = response["username"];
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("$message Safe travel, $uname."),
+          content: Text("$message Safe travel."),
         ));
         Navigator.pushReplacement(
           context,
@@ -107,22 +106,43 @@ class _BuyerPageState extends State<BuyerPage> {
                 mainAxisSpacing: 12.0, // Jarak antar baris
                 children: [
                   _buildCategoryCard('Ayam', Icons.fastfood, Colors.orange, () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AyamEntryPage()),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AyamEntryPage()),
+                    );
                   }),
-                  _buildCategoryCard('Daging', Icons.restaurant, Colors.red, () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const DagingEntryPage()));
+                  _buildCategoryCard('Daging', Icons.restaurant, Colors.red,
+                      () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DagingEntryPage()));
                   }),
                   _buildCategoryCard('Chinese Food', Icons.ramen_dining, Colors.amber, () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const ChineseFoodEntryPage()));
                   }),
-                  _buildCategoryCard('Arabic Food', Icons.local_dining, Colors.green, () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ArabicFoodEntryPage()));
+                  _buildCategoryCard(
+                      'Arabic Food', Icons.local_dining, Colors.green, () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ArabicFoodEntryPage()));
                   }),
-                  _buildCategoryCard('Dessert', Icons.icecream, Colors.pink, () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const DessertEntryPage()));
+                  _buildCategoryCard('Dessert', Icons.icecream, Colors.pink,
+                      () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DessertEntryPage()));
                   }),
-                  _buildCategoryCard('Makanan Berkuah', Icons.soup_kitchen, Colors.teal, () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MakananBerkuahEntryPage()));
+                  _buildCategoryCard(
+                      'Makanan Berkuah', Icons.soup_kitchen, Colors.teal, () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const MakananBerkuahEntryPage()));
                   }),
                   _buildCategoryCard('Nasi', Icons.rice_bowl, Colors.brown, () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const NasiEntryPage()));
@@ -145,7 +165,8 @@ class _BuyerPageState extends State<BuyerPage> {
     );
   }
 
-  Widget _buildCategoryCard(String label, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildCategoryCard(
+      String label, IconData icon, Color color, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(

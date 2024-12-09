@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-ProductEntry productEntryFromJson(String str) =>
-    ProductEntry.fromJson(json.decode(str));
+ProfileEntry profileEntryFromJson(String str) =>
+    ProfileEntry.fromJson(json.decode(str));
 
-String productEntryToJson(ProductEntry data) => json.encode(data.toJson());
+String profileEntryToJson(ProfileEntry data) => json.encode(data.toJson());
 
-class ProductEntry {
+class ProfileEntry {
   String username;
   String nama;
   String noTelp;
@@ -17,7 +17,7 @@ class ProductEntry {
   String? email;
   String? alamat;
 
-  ProductEntry({
+  ProfileEntry({
     required this.username,
     required this.nama,
     required this.noTelp,
@@ -30,7 +30,7 @@ class ProductEntry {
     required this.alamat,
   });
 
-  factory ProductEntry.fromJson(Map<String, dynamic> json) => ProductEntry(
+  factory ProfileEntry.fromJson(Map<String, dynamic> json) => ProfileEntry(
         username: json["username"],
         nama: json["nama"],
         noTelp: json["no_telp"],
