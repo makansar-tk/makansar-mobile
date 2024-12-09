@@ -5,27 +5,27 @@ import 'package:makansar_mobile/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
-class MakananBerkuahEntryPage extends StatefulWidget {
-  const MakananBerkuahEntryPage({super.key});
+class BeveragesEntryPage extends StatefulWidget {
+  const BeveragesEntryPage({super.key});
 
   @override
-  State<MakananBerkuahEntryPage> createState() => _MakananBerkuahEntryPageState();
+  State<BeveragesEntryPage> createState() => _BeveragesEntryPageState();
 }
 
-class _MakananBerkuahEntryPageState extends State<MakananBerkuahEntryPage> {
-  Future<List<FoodEntry>> fetchMakananBerkuahFoods(CookieRequest request) async {
+class _BeveragesEntryPageState extends State<BeveragesEntryPage> {
+  Future<List<FoodEntry>> fetchBeveragesFoods(CookieRequest request) async {
     final response = await request.get('http://localhost:8000/json/');
-    List<FoodEntry> listMakananBerkuah = [];
+    List<FoodEntry> listBeverages = [];
 
     for (var d in response) {
       if (d != null) {
         FoodEntry food = FoodEntry.fromJson(d);
-        if (food.fields.category.toLowerCase() == "makanan berkuah") {
-          listMakananBerkuah.add(food);
+        if (food.fields.category.toLowerCase() == "beverages") {
+          listBeverages.add(food);
         }
       }
     }
-    return listMakananBerkuah;
+    return listBeverages;
   }
 
   @override
@@ -34,7 +34,7 @@ class _MakananBerkuahEntryPageState extends State<MakananBerkuahEntryPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kategori Makanan Berkuah'),
+        title: const Text('Kategori Beverages'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -44,7 +44,7 @@ class _MakananBerkuahEntryPageState extends State<MakananBerkuahEntryPage> {
       ),
       drawer: const LeftDrawer(),
       body: FutureBuilder<List<FoodEntry>>(
-        future: fetchMakananBerkuahFoods(request),
+        future: fetchBeveragesFoods(request),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -53,7 +53,7 @@ class _MakananBerkuahEntryPageState extends State<MakananBerkuahEntryPage> {
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(
               child: Text(
-                'Tidak ada makanan kategori Makanan Berkukah yang tersedia.',
+                'Tidak ada makanan kategori Beverages yang tersedia.',
                 style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
             );
