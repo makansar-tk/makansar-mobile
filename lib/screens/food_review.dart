@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:makansar_mobile/models/data_profile.dart';
+import 'package:makansar_mobile/models/food_entry.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:makansar_mobile/screens/menu.dart';
 
 class FoodReviewFormPage extends StatefulWidget {
-  const FoodReviewFormPage({super.key});
+  final FoodEntry food;
+  const FoodReviewFormPage({super.key, required this.food}); 
 
   @override
   State<FoodReviewFormPage> createState() => _FoodReviewFormPageState();
@@ -94,19 +97,21 @@ class _FoodReviewFormPageState extends State<FoodReviewFormPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(
+                      backgroundColor: MaterialStateProperty.all(
                           Theme.of(context).colorScheme.primary),
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        // Kirim ke Django dan tunggu respons
                         final response = await request.postJson(
-                          "http://localhost:8000/create-flutter/",
-                          jsonEncode(<String, String>{
-                            'comment': _comment,
-                            'rating': _rating.toString(),
+                          "http://localhost:8000/review/makanan/${widget.food.pk}/create-review-flutter/",
+                            jsonEncode(<String, String>{
+                              // 'buyer': widget.product.username,
+                              'food_item' : widget.food.pk.toString(),
+                              'comment': _comment,
+                              'rating': _rating.toString(),
                           }),
                         );
+
                         if (context.mounted) {
                           if (response['status'] == 'success') {
                             ScaffoldMessenger.of(context)
@@ -120,8 +125,7 @@ class _FoodReviewFormPageState extends State<FoodReviewFormPage> {
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
-                              content:
-                                  Text("Terdapat kesalahan, silakan coba lagi."),
+                              content: Text("Terdapat kesalahan, silakan coba lagi."),
                             ));
                           }
                         }
@@ -141,4 +145,3 @@ class _FoodReviewFormPageState extends State<FoodReviewFormPage> {
     );
   }
 }
-

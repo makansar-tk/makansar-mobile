@@ -6,14 +6,13 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class SeeReviewPage extends StatelessWidget {
   final FoodEntry food;
-
   const SeeReviewPage({super.key, required this.food});
 
   Future<List<ReviewEntry>> fetchReviews(CookieRequest request) async {
-    final response = await request.get('http://localhost:8000/reviews/json/');
+    final response = await request.get('http://localhost:8000/review/makanan/${food.pk}/reviews/json/');
     List<ReviewEntry> reviews = [];
     for (var d in response) {
-      if (d['fields']['food_item'] == food.pk) { // Gunakan 'pk' untuk filter review
+      if (d['fields']['food_item'] == food.pk) { 
         reviews.add(ReviewEntry.fromJson(d));
       }
     }
@@ -26,7 +25,7 @@ class SeeReviewPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reviews for ${food.fields.foodName}'),
+        title: Text('Reviews untuk ${food.fields.foodName}'),
       ),
       body: FutureBuilder(
         future: fetchReviews(request),
@@ -53,7 +52,7 @@ class SeeReviewPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Comment: ${review.fields.comment}'),
-                        Text('Buyer: ${review.fields.buyerName}'),
+                        Text('Buyer: ${review.fields.buyer}'),
                         Text(
                           'Date: ${review.fields.dateCreated}',
                           style: const TextStyle(fontSize: 12, color: Colors.grey),
