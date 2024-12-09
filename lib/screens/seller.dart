@@ -28,7 +28,7 @@ class _SellerPageState extends State<SellerPage> {
 
   Future<void> _logout() async {
     final request = context.read<CookieRequest>();
-    final response = await request.logout("http://127.0.0.1:8000/auth/logout/");
+    final response = await request.logout("http://10.0.2.2:8000/auth/logout/");
     String message = response["message"];
     if (context.mounted) {
       if (response['status']) {
