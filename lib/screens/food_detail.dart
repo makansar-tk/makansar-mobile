@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makansar_mobile/models/food_entry.dart';
+import 'discussion_page.dart';
 
 class FoodDetailPage extends StatelessWidget {
   final FoodEntry food;
@@ -64,6 +65,23 @@ class FoodDetailPage extends StatelessWidget {
                   child: const Text('Add Favorite'),
                 ),
               ],
+            ),
+            const SizedBox(height: 32),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DiscussionPage(
+                        makananId: food.pk,
+                        foodName: food.fields.foodName,
+                      ),
+                    ),
+                  );
+                },
+                child: const Text('View Discussions'),
+              ),
             ),
           ],
         ),
