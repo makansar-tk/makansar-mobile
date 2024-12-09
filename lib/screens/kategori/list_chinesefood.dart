@@ -1,195 +1,143 @@
 import 'package:flutter/material.dart';
 import 'package:makansar_mobile/models/food_entry.dart';
+import 'package:makansar_mobile/screens/food_detail.dart';
 import 'package:makansar_mobile/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
-class ChineseFoodPage extends StatefulWidget {
-  const ChineseFoodPage({super.key});
+class ChineseFoodEntryPage extends StatefulWidget {
+  const ChineseFoodEntryPage({super.key});
 
   @override
-  State<ChineseFoodPage> createState() => _ChineseFoodPageState();
+  State<ChineseFoodEntryPage> createState() => _ChineseFoodEntryPageState();
 }
 
-class _ChineseFoodPageState extends State<ChineseFoodPage> {
-  List<FoodEntry> favoriteFoods = [];
-
-  Future<List<FoodEntry>> fetchFood(CookieRequest request, {String category = 'Chinese Food'}) async { 
+class _ChineseFoodEntryPageState extends State<ChineseFoodEntryPage> {
+  Future<List<FoodEntry>> fetchChineseFoodFoods(CookieRequest request) async {
     final response = await request.get('http://localhost:8000/json/');
-    
     List<FoodEntry> listChineseFood = [];
+
     for (var d in response) {
       if (d != null) {
-        listChineseFood.add(FoodEntry.fromJson(d));
+        FoodEntry food = FoodEntry.fromJson(d);
+        if (food.fields.category.toLowerCase() == "chinese food") {
+          listChineseFood.add(food);
+        }
       }
     }
     return listChineseFood;
   }
 
-  void _toggleFavorite(FoodEntry food) {
-    setState(() {
-      if (favoriteFoods.contains(food)) {
-        favoriteFoods.remove(food);
-      } else {
-        favoriteFoods.add(food);
-      }
-    });
-  }
-
-  void _showFoodDetails(FoodEntry food) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(food.fields.foodName),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Price: ${food.fields.price}'),
-              // Add more details from your FoodEntry model
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Close'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _deleteFood(FoodEntry food, List<FoodEntry> foodList) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Delete Food'),
-          content: Text('Are you sure you want to delete ${food.fields.foodName}?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  foodList.remove(food);
-                });
-                Navigator.of(context).pop();
-              },
-              child: const Text('Delete'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kategori Chinese Food'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Favorite Foods'),
-                    content: favoriteFoods.isEmpty
-                        ? const Text('No favorite foods yet.')
-                        : Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: favoriteFoods
-                                .map((food) => ListTile(
-                                      title: Text(food.fields.foodName),
-                                      subtitle: Text(food.fields.price as String),
-                                    ))
-                                .toList(),
-                          ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: const Text('Close'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-        ],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       drawer: const LeftDrawer(),
-      body: FutureBuilder(
-        future: fetchFood(request),
-        builder: (context, AsyncSnapshot snapshot) {
-          if (snapshot.data == null) {
+      body: FutureBuilder<List<FoodEntry>>(
+        future: fetchChineseFoodFoods(request),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(
+              child: Text(
+                'Tidak ada makanan kategori Chinese Food tersedia.',
+                style: TextStyle(fontSize: 18, color: Colors.grey),
+              ),
+            );
           } else {
-            if (!snapshot.hasData) {
-              return const Column(
-                children: [
-                  Text(
-                    'Belum ada makanan yang tersedia.',
-                    style: TextStyle(fontSize: 20, color: Color(0xff59A5D8)),
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final food = snapshot.data![index];
+                return Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                ],
-              );
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (_, index) {
-                  FoodEntry food = snapshot.data![index];
-                  return Card(
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: ListTile(
-                      title: Text(
-                        food.fields.foodName,
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          food.fields.foodName,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                      subtitle: Text(food.fields.price as String),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              favoriteFoods.contains(food) 
-                                ? Icons.favorite 
-                                : Icons.favorite_border,
-                              color: favoriteFoods.contains(food) 
-                                ? Colors.red 
-                                : null,
+                        const SizedBox(height: 8),
+                        Text(
+                          'Price: Rp${food.fields.price}',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FoodDetailPage(food: food),
+                                  ),
+                                );
+                              },
+                              child: const Text('Show Detail'),
                             ),
-                            onPressed: () => _toggleFavorite(food),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () => _deleteFood(food, snapshot.data!),
-                          ),
-                        ],
-                      ),
-                      onTap: () => _showFoodDetails(food),
+                            IconButton(
+                              icon: const Icon(Icons.favorite_border),
+                              color: Colors.red,
+                              onPressed: () {
+                                // Logika menambahkan makanan ke favorit
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                        '${food.fields.foodName} has been added to favorites!'),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  );
-                },
-              );
-            }
+                  ),
+                );
+              },
+            );
           }
         },
       ),
     );
   }
 }
-
