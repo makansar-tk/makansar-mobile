@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:makansar_mobile/screens/kategori/list_arabicfood.dart';
+import 'package:makansar_mobile/screens/kategori/list_beverages.dart';
 import 'package:makansar_mobile/screens/kategori/list_chinesefood.dart';
 import 'package:makansar_mobile/screens/kategori/list_daging.dart';
 import 'package:makansar_mobile/screens/kategori/list_dessert.dart';
 import 'package:makansar_mobile/screens/kategori/list_ayam.dart';
 import 'package:makansar_mobile/screens/kategori/list_makananberkuah.dart';
+import 'package:makansar_mobile/screens/kategori/list_martabak.dart';
+import 'package:makansar_mobile/screens/kategori/list_nasi.dart';
+import 'package:makansar_mobile/screens/kategori/list_seafood.dart';
 import 'package:makansar_mobile/screens/login.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -84,10 +88,18 @@ class MyHomePage extends StatelessWidget {
                   _buildCategoryCard('Makanan Berkuah', Icons.soup_kitchen, Colors.teal, () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const MakananBerkuahEntryPage()));
                   }),
-                  _buildCategoryCard('Nasi', Icons.rice_bowl, Colors.brown, () {}),
-                  _buildCategoryCard('Seafood', Icons.anchor, Colors.blue, () {}),
-                  _buildCategoryCard('Martabak', Icons.local_pizza, Colors.deepOrange, () {}),
-                  _buildCategoryCard('Beverages', Icons.local_cafe, Colors.purple, () {}),
+                  _buildCategoryCard('Nasi', Icons.rice_bowl, Colors.brown, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const NasiEntryPage()));
+                  }),
+                  _buildCategoryCard('Seafood', Icons.anchor, Colors.blue, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SeaFoodEntryPage()));
+                  }),
+                  _buildCategoryCard('Martabak', Icons.local_pizza, Colors.deepOrange, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MartabakEntryPage()));
+                  }),
+                  _buildCategoryCard('Beverages', Icons.local_cafe, Colors.purple, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const BeveragesEntryPage()));
+                  }),
                 ],
               ),
             ),
