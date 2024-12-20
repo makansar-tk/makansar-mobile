@@ -10,12 +10,14 @@ class ForumEntry {
   final int id;
   final String title;
   final String message;
+  final String user; // Ensure this field exists in the model
   final List<Reply> replies;
 
   ForumEntry({
     required this.id,
     required this.title,
     required this.message,
+    required this.user, // Add this field
     required this.replies,
   });
 
@@ -23,6 +25,7 @@ class ForumEntry {
         id: json["id"],
         title: json["title"],
         message: json["message"],
+        user: json["user"], // Ensure this is parsed from JSON
         replies: List<Reply>.from(json["replies"].map((x) => Reply.fromJson(x))),
       );
 
@@ -30,6 +33,7 @@ class ForumEntry {
         "id": id,
         "title": title,
         "message": message,
+        "user": user, // Ensure this is converted to JSON
         "replies": List<dynamic>.from(replies.map((x) => x.toJson())),
       };
 }
